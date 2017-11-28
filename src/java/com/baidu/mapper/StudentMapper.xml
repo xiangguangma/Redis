@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baidu.mapper.StudentMapper">
+
+    <!--mybatis自带的二级缓存-->
+    <!--<cache/>-->
+
+    <!--Redis缓存-->
+    <cache type="com.baidu.cache.RedisCache"/>
+
+
+    <!--如果不想缓存: useCache=false-->
+    <select id="findAll"
+            resultType="com.baidu.bean.Student"
+            useCache="false">
+        SELECT * FROM student
+    </select>
+
+    <select id="findById"
+            parameterType="int"
+            resultType="com.baidu.bean.Student">
+        SELECT * FROM student WHERE id = #{id}
+    </select>
+
+</mapper>
